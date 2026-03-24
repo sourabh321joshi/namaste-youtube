@@ -5,32 +5,32 @@ import { Link } from 'react-router-dom';
 const Sidebar = () => {
     const isMenuOpen =useSelector(store =>store.app.isMenuOpen);
         //Early return pattern
-    if(!isMenuOpen) return null;
+    if(!isMenuOpen) return <div className="hidden md:block md:w-16" />;
 
   return (
-    <div className='p-5 shadow-lg w-48'>
-       <ul>
-        <li><Link to="/">Home</Link></li>
-        <li>Shorts</li>
-        <li>Videos</li>
-        <li>Live</li>
+    <aside className='sticky top-16 hidden h-[calc(100vh-4rem)] w-56 overflow-y-auto border-r border-gray-200 p-4 md:block dark:border-gray-800'>
+       <ul className="space-y-1">
+        <li><Link className="block rounded-lg px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-800" to="/">Home</Link></li>
+        <li className="rounded-lg px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-800">Shorts</li>
+        <li className="rounded-lg px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-800">Subscriptions</li>
+        <li className="rounded-lg px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-800">Live</li>
       </ul>
 
-      <h1 className='font-bold pt-5'>Subscriptions</h1>
-      <ul>
-        <li>Music</li>
-        <li>Sports</li>
-        <li>Gaming</li>
-        <li>Movies</li>
+      <h1 className='pt-5 text-sm font-semibold text-gray-500'>Explore</h1>
+      <ul className="mt-2 space-y-1">
+        <li className="rounded-lg px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-800">Music</li>
+        <li className="rounded-lg px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-800">Sports</li>
+        <li className="rounded-lg px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-800">Gaming</li>
+        <li className="rounded-lg px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-800">Movies</li>
       </ul>
-      <h1 className='font-bold pt-5'>Watch Later</h1>
-      <ul>
-        <li>Music</li>
-        <li>Sports</li>
-        <li>Gaming</li>
-        <li>Movies</li>
+      <h1 className='pt-5 text-sm font-semibold text-gray-500'>Library</h1>
+      <ul className="mt-2 space-y-1">
+        <li className="rounded-lg px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-800">History</li>
+        <li className="rounded-lg px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-800">Playlists</li>
+        <li className="rounded-lg px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-800">Your videos</li>
+        <li className="rounded-lg px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-800">Watch later</li>
       </ul>
-    </div>
+    </aside>
   )
 }
 

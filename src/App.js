@@ -1,11 +1,14 @@
 import { Provider } from "react-redux";
-import "./App.css";
+import { Suspense, lazy, useEffect } from "react";
 import Body from "./components/Body";
-import Head from "./components/Head";
 import store from "./utils/store";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import MainContainer from "./components/MainContainer";
-import WatchPage from "./components/WatchPage";
+import "./App.css";
+import { useSelector } from "react-redux";
+
+const MainContainer = lazy(() => import("./components/MainContainer"));
+const WatchPage = lazy(() => import("./components/WatchPage"));
+const SearchResultsPage = lazy(() => import("./components/SearchResultsPage"));
 
 const appRouter = createBrowserRouter([{
   path:  "/",
@@ -18,18 +21,34 @@ const appRouter = createBrowserRouter([{
     {
       path:"watch",
       element:<WatchPage/>
+    },
+    {
+      path: "results",
+      element: <SearchResultsPage />,
     }
 
   ]
 }]);
 
+const ThemeWrapper = () => {
+  const isDarkMode = useSelector((state) => state.app.darkMode);
+
+  useEffect(() => {
+    document.body.className = isDarkMode ? "bg-[#0f0f0f] text-white" : "bg-white text-black";
+    document.documentElement.classList.toggle("dark", isDarkMode);
+  }, [isDarkMode]);
+
+  return (
+    <Suspense fallback={<div className="p-6">Loading...</div>}>
+      <RouterProvider router={appRouter} />
+    </Suspense>
+  );
+};
+
 function App() {
   return (
     <Provider store={store}>
-    <div >
-      <Head/>
-      <RouterProvider router={appRouter}/>
-    </div>
+      <ThemeWrapper />
     </Provider>
   );
 }

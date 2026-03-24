@@ -19,7 +19,7 @@ const ButtonList = () => {
        
       ];
   return (
-    <div className='flex overflow-x-auto'>
+    <div className='flex gap-2 overflow-x-auto px-2 py-1'>
      
      {buttonNames.map((name, index) => (
         <Button key={index} name={name} />
